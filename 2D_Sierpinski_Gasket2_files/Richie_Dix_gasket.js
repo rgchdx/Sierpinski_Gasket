@@ -36,8 +36,8 @@ window.onload = function init()
         let radius = Math.random() * 0.1 + 0.05;
 
         let center = vec2(
-            Math.random() * 2 - 1,  // x in range [-1, 1]
-            Math.random() * 2 - 1   // y in range [-1, 1]
+            Math.random() * 2 - 1,
+            Math.random() * 2 - 1
         );
 
         for (let i = 0; i < numTriangles; i++) {
@@ -48,13 +48,13 @@ window.onload = function init()
                 center[0] + radius * Math.cos(angle1),
                 center[1] + radius * Math.sin(angle1)
             );
-
             let p2 = vec2(
                 center[0] + radius * Math.cos(angle2),
                 center[1] + radius * Math.sin(angle2)
             );
 
             let color = colorPalette[(i + b) % colorPalette.length];
+            
             triangle(center, p1, p2, color);
         }
     }
