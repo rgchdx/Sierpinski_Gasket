@@ -6,32 +6,26 @@
 
 
 <script id="vertex-shader" type="x-shader/x-vertex">
-#version 300 es
-in vec4 aPosition;
-
-void
-main()
-{
-    gl_Position = aPosition;
-}
+  attribute vec4 aPosition;
+  attribute vec4 aColor;
+  varying vec4 vColor;
+  void main() {
+      gl_Position = aPosition;
+      vColor = aColor;
+  }
 </script>
 
 <script id="fragment-shader" type="x-shader/x-fragment">
-#version 300 es
-precision mediump float;
-
-out vec4 fColor;
-
-void
-main()
-{
-    fColor = vec4( 1.0, 0.0, 0.0, 1.0 );
-}
+  precision mediump float;
+  varying vec4 vColor;
+  void main() {
+      gl_FragColor = vColor;
+  }
 </script>
 
 <script type="text/javascript" src="./2D_Sierpinski_Gasket2_files/initShaders.js"></script>
 <script type="text/javascript" src="./2D_Sierpinski_Gasket2_files/MVnew.js"></script>
-<script type="text/javascript" src="./2D_Sierpinski_Gasket2_files/gasket2.js"></script>
+<script type="text/javascript" src="./2D_Sierpinski_Gasket2_files/Richie_Dix_gasket.js"></script>
 <script id="simplify-jobs-page-script" src="chrome-extension://pbanhockgagggenencehbnadejlgchfc/js/pageScript.bundle.js"></script></head>
 
 <body data-new-gr-c-s-check-loaded="14.1229.0" data-gr-ext-installed="">
