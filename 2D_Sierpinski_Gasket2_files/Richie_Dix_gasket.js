@@ -7,6 +7,7 @@ var positions = [];
 var colors = [];
 
 var numTimesToSubdivide = 5;
+var numBubbles = Math.floor(Math.random() * (20 - 5 + 1)) + 5;
 
 window.onload = function init()
 {
@@ -21,31 +22,43 @@ window.onload = function init()
 
     // First, initialize the corners of our gasket with three positions.
 
-    var numTriangles = 6; // increase for smoother circle
-    var radius = 1.0;
-    var center = vec2(0, 0);
+    let colorPalette = [
+        vec4(0.6, 0.6, 1.0, 1.0),
+        vec4(0.5, 0.5, 1.0, 1.0),
+        vec4(0.4, 0.4, 1.0, 1.0),
+        vec4(0.3, 0.3, 1.0, 1.0),
+        vec4(0.2, 0.2, 1.0, 1.0),
+        vec4(0.1, 0.1, 1.0, 1.0)
+    ];
 
-    var colorPalette = [
-        vec4(1.0, 0.0, 0.0, 1.0), // red
-        vec4(0.0, 1.0, 0.0, 1.0), // green
-        vec4(0.0, 0.0, 1.0, 1.0), // blue
-        vec4(1.0, 1.0, 0.0, 1.0), // yellow
-        vec4(1.0, 0.0, 1.0, 1.0), // magenta
-        vec4(0.0, 1.0, 1.0, 1.0)
-    ]
+    for (let b = 0; b < numBubbles; b++) {
+        let numTriangles = getRandomInt(6, 20);
+        let radius = Math.random() * 0.1 + 0.05;
 
-    for (let i = 0; i < numTriangles; i++) {
-        let angle1 = 2 * Math.PI * i / numTriangles;
-        let angle2 = 2 * Math.PI * (i + 1) / numTriangles;
+        let center = vec2(
+            Math.random() * 2 - 1,  // x in range [-1, 1]
+            Math.random() * 2 - 1   // y in range [-1, 1]
+        );
 
-        let p1 = vec2(radius * Math.cos(angle1), radius * Math.sin(angle1));
-        let p2 = vec2(radius * Math.cos(angle2), radius * Math.sin(angle2));
+        for (let i = 0; i < numTriangles; i++) {
+            let angle1 = 2 * Math.PI * i / numTriangles;
+            let angle2 = 2 * Math.PI * (i + 1) / numTriangles;
 
-        positions.push(center, p1, p2);
+            let p1 = vec2(
+                center[0] + radius * Math.cos(angle1),
+                center[1] + radius * Math.sin(angle1)
+            );
 
-        let color = colorPalette[i % colorPalette.length];
-        colors.push(color, color, color);
+            let p2 = vec2(
+                center[0] + radius * Math.cos(angle2),
+                center[1] + radius * Math.sin(angle2)
+            );
+
+            let color = colorPalette[(i + b) % colorPalette.length];
+            triangle(center, p1, p2, color);
+        }
     }
+
 
     //
     //  Configure WebGL
@@ -91,4 +104,8 @@ function render()
 {
     gl.clear( gl.COLOR_BUFFER_BIT );
     gl.drawArrays( gl.TRIANGLES, 0, positions.length );
+}
+
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
 }
