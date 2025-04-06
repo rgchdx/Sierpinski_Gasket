@@ -6,7 +6,6 @@ var gl;
 var positions = [];
 var colors = [];
 
-var numTimesToSubdivide = 5;
 var numBubbles = Math.floor(Math.random() * (20 - 5 + 1)) + 5;
 
 window.onload = function init()
@@ -15,12 +14,6 @@ window.onload = function init()
 
     gl = canvas.getContext('webgl2');
     if (!gl) { alert( "WebGL 2.0 isn't available" ); }
-
-    //
-    //  Initialize our data for the Sierpinski Gasket
-    //
-
-    // First, initialize the corners of our gasket with three positions.
 
     let colorPalette = [
         vec4(0.6, 0.6, 1.0, 1.0),
@@ -54,7 +47,7 @@ window.onload = function init()
             );
 
             let color = colorPalette[(i + b) % colorPalette.length];
-            
+
             triangle(center, p1, p2, color);
         }
     }

@@ -113,6 +113,14 @@ function vec3()
     return out;
 }
 
+// Creates a 4-dimensional vector based on the number and type of arguments provided
+// Initializes an array out with 4 elements
+// Sets the type of out to 'vec4'
+// Case 0: No arguments, initializes out to (0, 0, 0, 0)
+// Case 1: One argument, checks if it's a vector and initializes out to the same values
+// Case 2: Two arguments, checks if the first is a number and the second is a vec3, initializes out accordingly
+// Case 3: Three arguments, initializes out to the provided values with the last element set to 1.0
+// Case 4: Four arguments, initializes out to the provided values
 function vec4()
 {
     var out = new Array(4);
